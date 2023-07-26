@@ -4,16 +4,29 @@ import './Navbar.css'
 import { AuthContext } from '../../../context/AuthProvider';
 
 const Navbar = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(() => { })
+    }
 
     const navItems = <>
         <li className='font-semibold'><Link to='/'>Home</Link></li>
         <li className='font-semibold'><Link to='/about'>About Us</Link></li>
-        <li className='font-semibold'><Link to='/login'>Login</Link></li>
-        <li className='font-semibold'><Link to='/signup'>Signup</Link></li>
+        <li className='font-semibold'><Link to='/dashboard'>Dashboard</Link></li>
+
         {
-            user?.name &&
-            <li className='font-semibold'><Link to='/signup'>{user?.name}</Link></li>
+            user?.uid ?
+                <>
+                    <li onClick={handleLogOut} className='font-semibold'><Link to='/'>Log out</Link></li>
+                    <li className='font-semibold'><Link to='/'>{user?.displayName}</Link></li>
+                </>
+                :
+                <>
+                    <li className='font-semibold'><Link to='/login'>Login</Link></li>
+                </>
         }
 
     </>
