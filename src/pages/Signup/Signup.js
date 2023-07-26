@@ -1,14 +1,15 @@
 import React, { useContext, useState } from 'react';
 import login from '../../assets/Login/login.png'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 import toast from 'react-hot-toast';
 
 const Signup = () => {
     const { createUser, updateUser } = useContext(AuthContext);
     const [error, setError] = useState('')
-    const { register, handleSubmit, formState: { errors }, reset } = useForm()
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const navigate = useNavigate();
 
     const handleSignup = data => {
         const role = data.role;
@@ -21,7 +22,8 @@ const Signup = () => {
                 // console.log(result.user)
                 setError('')
                 updateUserProfile(name);
-                toast.success("Signup completed Yah!!!")
+                toast.success("Signup completed Yah!!!");
+                navigate('/')
                 reset()
             })
             .catch((error) => {

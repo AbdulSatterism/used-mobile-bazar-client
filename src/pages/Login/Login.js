@@ -1,14 +1,17 @@
 import React, { useContext, useState } from 'react';
 import login from '../../assets/Login/login.png'
 import { useForm } from "react-hook-form"
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 import toast from 'react-hot-toast';
 
 const Login = () => {
     const { logInUser } = useContext(AuthContext);
     const [error, setError] = useState('')
-    const { register, handleSubmit, formState: { errors }, reset } = useForm()
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || "/";
 
     const handleLogin = data => {
         const email = data.email;
@@ -19,6 +22,7 @@ const Login = () => {
                 setError('');
                 toast.success('User login successfully');
                 reset();
+                navigate(from, { replace: true });
             })
             .catch(err => {
                 setError(err.message)
