@@ -9,9 +9,9 @@ const Login = () => {
     const { logInUser } = useContext(AuthContext);
     const [error, setError] = useState('')
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
-    const location = useLocation();
     const navigate = useNavigate();
-    const from = location.state?.from?.pathname || "/";
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/'
 
     const handleLogin = data => {
         const email = data.email;

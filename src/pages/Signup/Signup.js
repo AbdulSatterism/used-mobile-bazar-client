@@ -23,8 +23,8 @@ const Signup = () => {
                 setError('')
                 updateUserProfile(name);
                 toast.success("Signup completed Yah!!!");
+                reset();
                 navigate('/')
-                reset()
             })
             .catch((error) => {
                 setError(error.message)
@@ -38,7 +38,7 @@ const Signup = () => {
         };
         updateUser(profile)
             .then(() => {
-                // Profile updated!
+
                 // ...
             }).catch((error) => {
                 // An error occurred
