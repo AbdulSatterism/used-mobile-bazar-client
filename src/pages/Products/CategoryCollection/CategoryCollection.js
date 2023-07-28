@@ -10,15 +10,6 @@ const CategoryCollection = ({ product, setCategoryProduct }) => {
         window.my_modal_5.showModal();
     }
 
-    const { data: orderItem = [], refetch } = useQuery({
-        queryKey: ['orders'],
-        queryFn: async () => {
-            const res = await fetch('http://localhost:5000/orders');
-            const data = await res.json();
-            return data;
-        }
-    });
-    console.log(orderItem)
 
     return (
         <div className="card w-3/2 m-6 bg-yellow-600 shadow-xl">
@@ -33,16 +24,11 @@ const CategoryCollection = ({ product, setCategoryProduct }) => {
                 <p>Location: {salePlace}</p>
 
                 <div className="card-actions mb-0 justify-end">
-                    {
-                        orderItem.map(item => item.productId === _id ?
-                            <button className='btn btn-accent text-white'>Sold Out</button>
-                            : <button
-                                onClick={() => handleClick(product)}
-                                className='btn btn-accent'
-                            >Order <FaShoppingBasket></FaShoppingBasket>
-                            </button>)
-                    }
-
+                    <button
+                        onClick={() => handleClick(product)}
+                        className='btn btn-accent'
+                    >Order <FaShoppingBasket></FaShoppingBasket>
+                    </button>
                 </div>
             </div>
 

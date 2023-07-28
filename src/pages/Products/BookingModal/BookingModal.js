@@ -32,7 +32,15 @@ const BookingModal = ({ categoryProduct, setCategoryProduct }) => {
             .then(data => {
                 if (data.acknowledged) {
                     toast.success(`your ${deviceName} booking successfully!!`);
-                    setCategoryProduct(null);
+                    fetch(`http://localhost:5000/orders/${_id}`, {
+                        method: "PUT"
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.acknowledged) {
+                                setCategoryProduct(null);
+                            }
+                        });
                 }
             })
     }
@@ -52,9 +60,9 @@ const BookingModal = ({ categoryProduct, setCategoryProduct }) => {
 
                     <input name='price' type="number" defaultValue={resalePrice} disabled className="input input-bordered input-primary w-full" />
 
-                    <input name='meetingPlace' type="text" placeholder="Enter your meet place name" className="input input-bordered input-primary w-full" />
+                    <input name='meetingPlace' type="text" placeholder="Enter your meet place name" className="input input-bordered input-primary w-full  " required />
 
-                    <input name='phone' type="number" placeholder="Enter your phone" className="input input-bordered input-primary w-full" />
+                    <input name='phone' type="number" placeholder="Enter your phone" className="input input-bordered input-primary w-full " required />
 
                     <div className='flex justify-between'>
                         <button className='btn btn-warning' onClick={() => setCategoryProduct(null)}>Cancel</button>

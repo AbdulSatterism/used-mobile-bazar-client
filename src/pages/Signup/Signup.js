@@ -86,7 +86,7 @@ const Signup = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" placeholder="email" className="input input-bordered"
+                            <input type="password" placeholder="Enter password" className="input input-bordered"
                                 {...register("password", {
                                     required: "password field is required",
                                     minLength: { value: 6, message: 'password must be 6 character or longer' }
