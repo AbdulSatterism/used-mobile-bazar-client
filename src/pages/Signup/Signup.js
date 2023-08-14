@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 import toast from 'react-hot-toast';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
 const Signup = () => {
     const { createUser, updateUser } = useContext(AuthContext);
@@ -16,15 +17,12 @@ const Signup = () => {
         const name = data.name;
         const email = data.email;
         const password = data.password;
-        // console.log(role, name, email, password);
         createUser(email, password)
             .then((result) => {
                 // console.log(result.user)
                 setError('')
                 updateUserProfile(name);
-                toast.success("Signup completed Yah!!!");
-                reset();
-                navigate('/')
+                saveUserDB(name, email, role)
             })
             .catch((error) => {
                 setError(error.message)
@@ -45,6 +43,30 @@ const Signup = () => {
                 // ...
             });
     }
+
+    const saveUserDB = (name, email, role) => {
+        const user = {
+            name: name,
+            email: email,
+            role: role
+        };
+        fetch(`http://localhost:5000/users`, {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    toast.success("Signup completed Yah!!!");
+                    reset();
+                    navigate('/')
+                }
+            })
+    }
+
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row">
@@ -61,7 +83,6 @@ const Signup = () => {
                             >
                                 <option value="seller">seller</option>
                                 <option value="buyer">buyer</option>
-                                <option value="admin">admin</option>
                             </select>
                         </div>
                         <div className="form-control">
@@ -101,7 +122,7 @@ const Signup = () => {
 
                         <p className='text-orange-600'>{error}</p>
                     </form>
-
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>

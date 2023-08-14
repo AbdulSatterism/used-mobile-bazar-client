@@ -8,6 +8,10 @@ import AddProduct from "../../pages/Dashboard/AddProduct/AddProduct";
 import Products from "../../pages/Products/Products/Products";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import MyOrdersProduct from "../../pages/Dashboard/MyOrdersProduct/MyOrdersProduct";
+import AllUsers from "../../pages/Dashboard/AllUsers/AllUsers";
+import AdminRoute from "../AdminRoute/AdminRoute";
+import SellerProduct from "../../pages/Dashboard/SellerProduct/SellerProduct";
+import AllOrders from "../../pages/Dashboard/AllOrders/AllOrders";
 
 
 const router = createBrowserRouter([
@@ -45,7 +49,23 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/myorders',
                 element: <MyOrdersProduct></MyOrdersProduct>
-            }
+            },
+            {
+                path: '/dashboard/sellerproduct',
+                element: <SellerProduct></SellerProduct>
+            },
+            {
+                path: '/dashboard/allusers',
+                element: <AdminRoute>
+                    <AllUsers></AllUsers>
+                </AdminRoute>
+            },
+            {
+                path: '/dashboard/allorders',
+                element: <AdminRoute>
+                    <AllOrders></AllOrders>
+                </AdminRoute>
+            },
         ]
     }
 

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthProvider';
 
 const AddProduct = () => {
+    const { user } = useContext(AuthContext)
     const [error, setError] = useState('')
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const imgbbKey = process.env.REACT_APP_imageHostKey;
@@ -35,6 +37,7 @@ const AddProduct = () => {
                         phone_id,
                         deviceName,
                         sellerName,
+                        sellerEmail: user.email,
                         phoneImg: imgData.data.url,
                         date,
                         originalPrice,
@@ -87,6 +90,15 @@ const AddProduct = () => {
                 </label>
                 <input type="text" placeholder="Enter seller name" className="input input-bordered"
                     {...register("sellerName", { required: "field is required" })}
+                />
+                {errors.sellerName && <p className='text-red-600'>{errors.sellerName?.message}</p>}
+            </div>
+            <div className="form-control">
+                <label className="label">
+                    <span className="label-text">Seller Email</span>
+                </label>
+                <input type="email" defaultValue={user?.email} className="input input-bordered"
+                    {...register("sellerEmail", { required: "field is required" })}
                 />
                 {errors.sellerName && <p className='text-red-600'>{errors.sellerName?.message}</p>}
             </div>

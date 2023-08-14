@@ -1,10 +1,20 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../context/AuthProvider';
 import { toast } from 'react-hot-toast';
+import { useQuery } from 'react-query';
 
 const BookingModal = ({ categoryProduct, setCategoryProduct }) => {
     const { user } = useContext(AuthContext)
     const { deviceName, sellerName, phoneImg, _id, resalePrice, } = categoryProduct;
+
+    // const { data: allOrders = [], refetch, isLoading } = useQuery({
+    //     queryKey: ['orders'],
+    //     queryFn: async () => {
+    //         const res = await fetch(`http://localhost:5000/allorders`);
+    //         const data = await res.json();
+    //         return data;
+    //     }
+    // });
 
     const handleSubmitOrder = (event) => {
         event.preventDefault();
@@ -67,6 +77,7 @@ const BookingModal = ({ categoryProduct, setCategoryProduct }) => {
                     <div className='flex justify-between'>
                         <button className='btn btn-warning' onClick={() => setCategoryProduct(null)}>Cancel</button>
                         <input type="submit" className="btn btn-accent " value="Confirm Order" />
+
                     </div>
                 </form>
             </dialog >

@@ -1,13 +1,16 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateProfile, signOut } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateProfile, signOut, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import app from '../firebase/firebase.config';
+import axios from "axios";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
+
+    const googleProvider = new GoogleAuthProvider();
 
     const createUser = (email, password) => {
         setLoading(true)
@@ -18,6 +21,12 @@ const AuthProvider = ({ children }) => {
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password);
     }
+
+    const googleSignIn = () => {
+        setLoading(true);
+        return signInWithPopup(auth, googleProvider);
+    }
+
     const logOut = () => {
         setLoading(true)
         return signOut(auth);
@@ -29,11 +38,19 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
-
             setUser(currentUser)
+
+            //get and set token here use axios like fetch
+            if (currentUser) {
+                axios.post('http://localhost:5000/jwt', { email: currentUser.email })
+                    .then(data => {
+                        localStorage.setItem('accessToken', data.data.token);
+                    })
+            }
+            else {
+                localStorage.removeItem('accessToken')
+            }
             setLoading(false)
-
-
         });
         return () => unsubscribe();
     }, []);
@@ -42,6 +59,7 @@ const AuthProvider = ({ children }) => {
         user,
         createUser,
         logInUser,
+        googleSignIn,
         logOut,
         updateUser,
         loading

@@ -13,7 +13,7 @@ const Products = () => {
             <div className='grid container mx-auto grid-cols-1  lg:grid-cols-2 my-10'>
 
                 {
-                    categoryProducts.map(product => <CategoryCollection
+                    categoryProducts?.map(product => <CategoryCollection
                         key={product._id}
                         product={product}
                         setCategoryProduct={setCategoryProduct}

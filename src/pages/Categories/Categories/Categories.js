@@ -11,7 +11,7 @@ const Categories = () => {
     });
 
     if (isLoading) {
-        <Loading></Loading>
+        return <Loading></Loading>
     }
     return (
         <div >
@@ -20,7 +20,7 @@ const Categories = () => {
             <div className='grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-16'>
 
                 {
-                    categories.map(category => <Category
+                    categories?.map(category => <Category
                         key={category.categoryId}
                         category={category}
                     >

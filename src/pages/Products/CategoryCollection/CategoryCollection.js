@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaShoppingBasket } from "react-icons/fa";
 import { useQuery } from 'react-query';
 
@@ -24,11 +24,13 @@ const CategoryCollection = ({ product, setCategoryProduct }) => {
                 <p>Location: {salePlace}</p>
 
                 <div className="card-actions mb-0 justify-end">
+
                     <button
                         onClick={() => handleClick(product)}
                         className='btn btn-accent'
-                    >Order <FaShoppingBasket></FaShoppingBasket>
+                    >Order<FaShoppingBasket></FaShoppingBasket>
                     </button>
+
                 </div>
             </div>
 

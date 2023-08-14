@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 import toast from 'react-hot-toast';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
 const Login = () => {
     const { logInUser } = useContext(AuthContext);
@@ -65,6 +66,7 @@ const Login = () => {
 
                         <p className='text-orange-600'>{error}</p>
                     </form>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>

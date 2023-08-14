@@ -3,16 +3,28 @@ import { AuthContext } from '../../../context/AuthProvider';
 import { useQuery } from 'react-query';
 import { toast } from 'react-hot-toast';
 import Loading from '../../Shared/Loading/Loading';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const MyOrdersProduct = () => {
-    const { user } = useContext(AuthContext);
+    const { user, loading } = useContext(AuthContext);
+    const [axiosSecure] = useAxiosSecure();
 
     const { data: orderItems = [], refetch, isLoading } = useQuery({
         queryKey: ['orders', user?.email],
+        // enabled: !loading,
+        // queryFn: async () => {
+        //     const res = await fetch(`http://localhost:5000/orders?email=${user?.email}`, {
+        //         headers: {
+        //             authorization: `bearer ${token}`
+        //         }
+        //     });
+        //     const data = await res.json();
+        //     return data;
+        // }
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/orders?email=${user?.email}`);
-            const data = await res.json();
-            return data;
+            const res = await axiosSecure(`/orders?email=${user?.email}`);
+            // console.log('res from axios', res)
+            return res.data;
         }
     });
 
@@ -53,28 +65,29 @@ const MyOrdersProduct = () => {
                     </thead>
                     <tbody>
                         {
-                            orderItems.map((order, i) => <tr
-                                key={order._id}
-                                className="hover"
-                            >
-                                <th>{i + 1}</th>
-                                <td>
-                                    <div className="avatar">
-                                        <div className="w-24 rounded-xl">
-                                            <img src={order?.img} alt='' />
+                            orderItems?.length === 0 ? <h1 className='text-2xl text-orange-500'>No orders confirm yet!!!</h1> :
+                                orderItems.map((order, i) => <tr
+                                    key={order._id}
+                                    className="hover"
+                                >
+                                    <th>{i + 1}</th>
+                                    <td>
+                                        <div className="avatar">
+                                            <div className="w-24 rounded-xl">
+                                                <img src={order?.img} alt='' />
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>{order?.deviceName}</td>
-                                <td>{order?.buyerName}</td>
-                                <td>${order?.price}</td>
-                                <td>
-                                    <button className='btn btn-primary btn-sm'>Pay</button>
-                                </td>
-                                <td>
-                                    <button onClick={() => handleDelete(order)} className='btn btn-warning btn-sm'>Cancel</button>
-                                </td>
-                            </tr>)
+                                    </td>
+                                    <td>{order?.deviceName}</td>
+                                    <td>{order?.buyerName}</td>
+                                    <td>${order?.price}</td>
+                                    <td>
+                                        <button className='btn btn-primary btn-sm'>Pay</button>
+                                    </td>
+                                    <td>
+                                        <button onClick={() => handleDelete(order)} className='btn btn-warning btn-sm'>Cancel</button>
+                                    </td>
+                                </tr>)
                         }
                     </tbody>
                 </table>

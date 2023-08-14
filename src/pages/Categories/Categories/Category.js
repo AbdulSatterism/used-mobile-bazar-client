@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 
 const Category = ({ category }) => {
     const { categoryId, categoryName, categoryImg } = category;
+
+
+
     return (
         <div className="card  mx-auto w-96 my-4 bg-base-100 shadow-xl">
             <figure className="px-10 pt-10 bg-violet-200">
