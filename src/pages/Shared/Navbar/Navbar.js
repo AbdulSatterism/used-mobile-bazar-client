@@ -14,7 +14,6 @@ const Navbar = () => {
 
     const navItems = <>
         <li className='font-semibold'><Link to='/'>Home</Link></li>
-        <li className='font-semibold'><Link to='/about'>About Us</Link></li>
         <li className='font-semibold'><Link to='/dashboard'>Dashboard</Link></li>
 
         {

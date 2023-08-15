@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { FaShoppingBasket } from "react-icons/fa";
-import { useQuery } from 'react-query';
 
 const CategoryCollection = ({ product, setCategoryProduct }) => {
     const { deviceName, sellerName, phoneImg, date, originalPrice, resalePrice, useTime, salePlace, _id } = product;
@@ -12,7 +11,7 @@ const CategoryCollection = ({ product, setCategoryProduct }) => {
 
 
     return (
-        <div className="card w-3/2 m-6 bg-yellow-600 shadow-xl">
+        <div className="card w-3/2 m-6 bg-slate-500 shadow-xl">
             <figure className='bg-white m-4'><img className='h-48' src={phoneImg} alt="Shoes" /></figure>
             <div className="card-body text-black my-0">
                 <h2 className="card-title mt-0">Device: {deviceName} </h2>
