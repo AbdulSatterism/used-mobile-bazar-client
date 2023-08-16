@@ -45,7 +45,7 @@ const AddProduct = () => {
                         useTime,
                         salePlace
                     };
-                    fetch('http://localhost:5000/products', {
+                    fetch('https://used-mobile-bazar-server.onrender.com/products', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'

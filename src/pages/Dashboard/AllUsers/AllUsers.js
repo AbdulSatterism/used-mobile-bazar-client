@@ -11,7 +11,7 @@ const AllUsers = () => {
     const { data: allUsers = [], refetch, isLoading } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            // const res = await fetch(`http://localhost:5000/users`);
+            // const res = await fetch(`https://used-mobile-bazar-server.onrender.com/users`);
             // const data = await res.json();
             // return data;
             const res = await axiosSecure.get('/users');
@@ -20,7 +20,7 @@ const AllUsers = () => {
     });
 
     const handleMakeAdmin = user => {
-        fetch(`http://localhost:5000/users/admin/${user?._id}`, {
+        fetch(`https://used-mobile-bazar-server.onrender.com/users/admin/${user?._id}`, {
             method: "PATCH"
         })
             .then(res => res.json())
@@ -35,7 +35,7 @@ const AllUsers = () => {
     const handleDeleteUser = user => {
         const agree = window.confirm(`are your sure want to delete ${user?.name} who is ${user?.role}`);
         if (agree) {
-            fetch(`http://localhost:5000/users/${user?._id}`, {
+            fetch(`https://used-mobile-bazar-server.onrender.com/users/${user?._id}`, {
                 method: "DELETE",
 
             })

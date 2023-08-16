@@ -14,7 +14,7 @@ const MyOrdersProduct = () => {
         queryKey: ['orders', user?.email],
         // enabled: !loading,
         // queryFn: async () => {
-        //     const res = await fetch(`http://localhost:5000/orders?email=${user?.email}`, {
+        //     const res = await fetch(`https://used-mobile-bazar-server.onrender.com/orders?email=${user?.email}`, {
         //         headers: {
         //             authorization: `bearer ${token}`
         //         }
@@ -31,7 +31,7 @@ const MyOrdersProduct = () => {
 
     //
     const handleDelete = (order) => {
-        fetch(`http://localhost:5000/orders/${order._id}`, {
+        fetch(`https://used-mobile-bazar-server.onrender.com/orders/${order._id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

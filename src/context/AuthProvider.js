@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
 
             //get and set token here use axios like fetch
             if (currentUser) {
-                axios.post('http://localhost:5000/jwt', { email: currentUser.email })
+                axios.post('https://used-mobile-bazar-server.onrender.com/jwt', { email: currentUser.email })
                     .then(data => {
                         localStorage.setItem('accessToken', data.data.token);
                     })

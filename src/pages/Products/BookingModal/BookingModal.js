@@ -10,7 +10,7 @@ const BookingModal = ({ categoryProduct, setCategoryProduct }) => {
     // const { data: allOrders = [], refetch, isLoading } = useQuery({
     //     queryKey: ['orders'],
     //     queryFn: async () => {
-    //         const res = await fetch(`http://localhost:5000/allorders`);
+    //         const res = await fetch(`https://used-mobile-bazar-server.onrender.com/allorders`);
     //         const data = await res.json();
     //         return data;
     //     }
@@ -31,7 +31,7 @@ const BookingModal = ({ categoryProduct, setCategoryProduct }) => {
             phone: phone,
             img: phoneImg
         }
-        fetch(`http://localhost:5000/orders`, {
+        fetch(`https://used-mobile-bazar-server.onrender.com/orders`, {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -42,7 +42,7 @@ const BookingModal = ({ categoryProduct, setCategoryProduct }) => {
             .then(data => {
                 if (data.acknowledged) {
                     toast.success(`your ${deviceName} booking successfully!!`);
-                    fetch(`http://localhost:5000/orders/${_id}`, {
+                    fetch(`https://used-mobile-bazar-server.onrender.com/orders/${_id}`, {
                         method: "PUT"
                     })
                         .then(res => res.json())

@@ -20,7 +20,7 @@ const SellerProduct = () => {
     const handleDelete = product => {
         const agree = window.confirm(`Are you sure want to delete ${product?.deviceName} ?`);
         if (agree) {
-            fetch(`http://localhost:5000/products/${product?._id}`, {
+            fetch(`https://used-mobile-bazar-server.onrender.com/products/${product?._id}`, {
                 method: 'DELETE',
                 headers: {
                     'content-type': 'application/json',

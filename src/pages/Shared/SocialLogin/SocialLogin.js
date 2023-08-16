@@ -19,7 +19,7 @@ const SocialLogin = () => {
                     email: loggedUser.email,
                     role: 'buyer'
                 }
-                fetch(`http://localhost:5000/users`, {
+                fetch(`https://used-mobile-bazar-server.onrender.com/users`, {
                     method: "POST",
                     headers: {
                         'content-type': 'application/json'

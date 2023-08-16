@@ -27,7 +27,7 @@ const router = createBrowserRouter([
             {
                 path: '/products/:id',
                 element: <PrivateRoute><Products></Products></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
+                loader: ({ params }) => fetch(`https://used-mobile-bazar-server.onrender.com/products/${params.id}`)
             },
             {
                 path: '/login',
