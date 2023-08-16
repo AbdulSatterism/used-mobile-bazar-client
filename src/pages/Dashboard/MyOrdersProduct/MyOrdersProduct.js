@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../context/AuthProvider';
 import { useQuery } from 'react-query';
 import { toast } from 'react-hot-toast';
 import Loading from '../../Shared/Loading/Loading';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { Link } from 'react-router-dom';
 
 const MyOrdersProduct = () => {
-    const { user, loading } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const [axiosSecure] = useAxiosSecure();
 
     const { data: orderItems = [], refetch, isLoading } = useQuery({
@@ -68,6 +69,7 @@ const MyOrdersProduct = () => {
                             orderItems?.length === 0 ? <h1 className='text-2xl text-orange-500'>No orders confirm yet!!!</h1> :
                                 orderItems.map((order, i) => <tr
                                     key={order._id}
+
                                     className="hover"
                                 >
                                     <th>{i + 1}</th>
@@ -81,8 +83,12 @@ const MyOrdersProduct = () => {
                                     <td>{order?.deviceName}</td>
                                     <td>{order?.buyerName}</td>
                                     <td>${order?.price}</td>
+
                                     <td>
-                                        <button className='btn btn-primary btn-sm'>Pay</button>
+                                        <Link to="/dashboard/payment" >
+                                            <button
+                                                className='btn btn-primary btn-sm'>Pay</button>
+                                        </Link>
                                     </td>
                                     <td>
                                         <button onClick={() => handleDelete(order)} className='btn btn-warning btn-sm'>Cancel</button>
