@@ -1,3 +1,11 @@
+NB:Used Mobile Bazar:
+•	Used mobile bazar is a second hand mobile online sale and buy website. There is three type of users. Admin, Seller, Buyer
+•	Admin can do all things and seller can sale anything and buyer can buy any used mobile.
+•	 admin@gmail.com, buyer@gmail.com, seller: amar@gmail.com all gamil password:123456
+•	Technologies: React js, javascript, node js, mongodb, jwt, firebase, react-hook-form,  react-hot-toast, react-query, react router dom.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
